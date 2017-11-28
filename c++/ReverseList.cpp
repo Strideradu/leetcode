@@ -9,13 +9,16 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* last= NULL;
-        while(head) {
-            ListNode* cur = head;
-            head = head->next;
-            cur -> next = last;
-            last = cur;
+        ListNode* cur = head;
+        ListNode* prev = nullptr;
+    
+        while(cur){
+            ListNode* tmp = cur;
+            // Noticed move cur to cur->next first, otherwise when change tmp->next the cur also changes!
+            cur = cur->next;
+            tmp->next = prev;            
+            prev = tmp;
         }
-        return last;
+        return prev;
     }
 };
